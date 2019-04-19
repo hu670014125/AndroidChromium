@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion 25
+    buildToolsVersion '28.0.3'
+
+
+
+    defaultConfig {
+        applicationId "org.chromium.chrome.browser"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        release {
+
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    dexOptions {
+        jumboMode = true
+        javaMaxHeapSize "4g"
+    }
+
+    aaptOptions {
+        noCompress "dat", "bin", "pak"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile files('libs/components/invalidation/impl/java.jar')
+    compile files('libs/components/invalidation/impl/proto_java.jar')
+    compile files('libs/components/signin/core/browser/android/java.jar')
+    compile files('libs/components/spellcheck/browser/android/java.jar')
+    compile files('libs/device/battery/mojo_bindings_java.jar')
+    compile files('libs/device/bluetooth/java.jar')
+    compile files('libs/device/gamepad/java.jar')
+    compile files('libs/device/generic_sensor/public/interfaces/interfaces_java.jar')
+    compile files('libs/device/generic_sensor/java.jar')
+    compile files('libs/device/nfc/mojo_bindings_java.jar')
+    compile files('libs/device/nfc/android/java.jar')
+    compile files('libs/device/power_save_blocker/java.jar')
+    compile files('libs/device/time_zone_monitor/java.jar')
+    compile files('libs/device/usb/java.jar')
+    compile files('libs/device/vibration/mojo_bindings_java.jar')
+    compile files('libs/mojo/public/java/bindings.jar')
+    compile files('libs/mojo/public/java/system.jar')
+    compile files('libs/services/service_manager/public/interfaces/interfaces_java.jar')
+    compile files('libs/third_party/WebKit/public/android_mojo_bindings_java.jar')
+    compile files('libs/ui/base/mojo/mojo_bindings_java.jar')
+    compile project(':libraries_res:chrome_res')
+    compile project(':libraries_res:ui_res')
+    compile project(':libraries_res:content_res')
+
+    compile 'com.android.support:multidex:1.0.2'
+}
